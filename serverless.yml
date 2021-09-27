@@ -1,0 +1,28 @@
+service: test-aws-sdk
+
+custom:
+    localstack:
+        stages:
+            - us-east-1
+            - ap-northeast-1
+        lambda:
+            mountCode: true
+
+plugins:
+    - serverless-localstack
+
+configValidationMode: error
+
+frameworkVersion: '2'
+
+useDotenv: true
+
+provider:
+    name: aws
+    runtime: nodejs12.x
+    lambdaHashingVersion: 20201221
+    region: ${opt:stage}
+
+functions:
+    echo:
+        handler: handler.echo

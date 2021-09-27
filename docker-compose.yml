@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+    aws:
+        container_name: test-aws-sdk-aws
+        image: localstack/localstack
+        environment:
+            LAMBDA_EXECUTOR: docker
+            COMPOSE_CONVERT_WINDOWS_PATHS: true
+            LAMBDA_REMOTE_DOCKER: false
+            DATA_DIR: /tmp/localstack/data
+        ports:
+            - 4566:4566
+        networks:
+            - network
+        volumes:
+            - aws:/tmp/localstack
+            - /var/run/docker.sock:/var/run/docker.sock
+    nodejs:
+        container_name: test-aws-sdk-nodejs
+        image: node
+        ports:
+            - 8081:80
+        networks:
+            - network
+        volumes:
+            - .:/usr/src/app
+        working_dir: /usr/src/app
+        command: [ node, /usr/src/app/nodejs/index.mjs ]
+
+networks:
+    default:
+        name: test-aws-sdk
+    network:
+        name: test-aws-sdk
+
+volumes:
+    aws:
+        name: test-aws-sdk-aws
