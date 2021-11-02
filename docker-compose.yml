@@ -16,6 +16,16 @@ services:
         volumes:
             - aws:/tmp/localstack
             - /var/run/docker.sock:/var/run/docker.sock
+    php:
+        container_name: test-aws-sdk-php
+        image: php:apache
+        ports:
+            - 8080:80
+        networks:
+            - network
+        volumes:
+            - ./vendor:/var/www/vendor
+            - ./php:/var/www/html
     nodejs:
         container_name: test-aws-sdk-nodejs
         image: node
