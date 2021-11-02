@@ -6,8 +6,8 @@ services:
         image: localstack/localstack
         environment:
             LAMBDA_EXECUTOR: docker
-            COMPOSE_CONVERT_WINDOWS_PATHS: true
-            LAMBDA_REMOTE_DOCKER: false
+            COMPOSE_CONVERT_WINDOWS_PATHS: 'true'
+            LAMBDA_REMOTE_DOCKER: 'false'
             DATA_DIR: /tmp/localstack/data
         ports:
             - 4566:4566
