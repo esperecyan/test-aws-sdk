@@ -3,7 +3,7 @@ version: '3.8'
 services:
     aws:
         container_name: test-aws-sdk-aws
-        image: localstack/localstack
+        image: localstack/localstack:0.13.0.10
         environment:
             LAMBDA_EXECUTOR: docker
             COMPOSE_CONVERT_WINDOWS_PATHS: 'true'
@@ -18,7 +18,7 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
     php:
         container_name: test-aws-sdk-php
-        image: php:apache
+        image: php:8.1.0-apache
         ports:
             - 8080:80
         networks:
@@ -28,7 +28,7 @@ services:
             - ./php:/var/www/html
     nodejs:
         container_name: test-aws-sdk-nodejs
-        image: node
+        image: node:17.2.0
         ports:
             - 8081:80
         networks:
